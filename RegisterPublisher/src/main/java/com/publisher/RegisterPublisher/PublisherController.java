@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.Map;
 
+import static com.publisher.RegisterPublisher.AppBundleIdValidator.validatorFunction;
+
 @RestController
 @RequestMapping("publish")
 public class PublisherController {
@@ -22,7 +24,7 @@ public class PublisherController {
         this.publisherService = publisherService;
     }
     @PostMapping
-    public void addApp(@RequestBody Map<String, Object> data){
+    public String addApp(@RequestBody Map<String, Object> data){
 //        System.out.println(data);
 //        System.out.println(data.getClass());
 //        System.out.println(data.get("name"));
@@ -31,7 +33,11 @@ public class PublisherController {
         String publisher_email = (String)data.get("email");
         String app_bundle_id = (String)data.get("app_bundle_id");
         String app_name = (String)data.get("app_name");
+        String output = validatorFunction(app_bundle_id);
+        if(output.length()==0){
+            return "App ID invalid";
+        }
         publisherService.addNewApp(data);
-
+        return output;
     }
 }
