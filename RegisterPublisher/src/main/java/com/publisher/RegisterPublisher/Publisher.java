@@ -34,7 +34,6 @@ public class Publisher {
 
     }
     public Publisher( String publisher_name, String publisher_email) {
-        //this.publisher_id = publisher_id;
         this.publisher_name = publisher_name;
         this.publisher_email = publisher_email;
     }
