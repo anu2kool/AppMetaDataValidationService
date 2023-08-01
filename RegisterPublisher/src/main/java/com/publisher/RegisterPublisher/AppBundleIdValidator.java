@@ -11,7 +11,7 @@ public class AppBundleIdValidator {
     public static String validatorFunction(String app_bundle_id){
         System.out.println("Hello and welcome!");
         try {
-            URL url = new URL("http://127.0.0.1:5000/home?app_bundle_id="+app_bundle_id);
+            URL url = new URL("http://flaskapp:5000/home?app_bundle_id="+app_bundle_id);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
