@@ -23,12 +23,12 @@ services:
       - "5000:5000"
 
   # Spring Boot application service
-  app:
+  springapp:
     build:
       context: .
       dockerfile: Dockerfile
     #network_mode: "host"
-    container_name: main_publisher_app
+    container_name: springapp
     depends_on:
       - db
     ports:
@@ -36,9 +36,22 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/publisherdb
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: ######
+      SPRING_DATASOURCE_PASSWORD: #######
 
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    #network_mode: "host"
+    command:
+      - "--web.enable-lifecycle"
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
 
 
 volumes:
   postgres_data:
+  prometheus_data:
