@@ -9,7 +9,6 @@ import java.net.URL;
 
 public class AppBundleIdValidator {
     public static String validatorFunction(String app_bundle_id){
-        System.out.println("Hello and welcome!");
         try {
             URL url = new URL("http://flaskapp:5000/home?app_bundle_id="+app_bundle_id);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -23,15 +22,11 @@ public class AppBundleIdValidator {
 
             BufferedReader br = new BufferedReader(new InputStreamReader(
                     (conn.getInputStream())));
-            System.out.println(br);
             String finaloutput="";
             String output;
-            System.out.println("Output from Server .... \n");
             while ((output = br.readLine()) != null) {
                 finaloutput+=output;
             }
-            //System.out.println(finaloutput);
-            //System.out.println(finaloutput.length());
             conn.disconnect();
             return finaloutput;
 
