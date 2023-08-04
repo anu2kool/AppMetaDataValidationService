@@ -10,7 +10,7 @@ import java.net.URL;
 public class AppBundleIdValidator {
     public static String validatorFunction(String app_bundle_id){
         try {
-            URL url = new URL("http://flaskapp:5000/home?app_bundle_id="+app_bundle_id);
+            URL url = new URL("http://flask-app-service:5000/home?app_bundle_id="+app_bundle_id);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.setRequestProperty("Accept", "application/json");
