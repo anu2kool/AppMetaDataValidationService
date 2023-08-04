@@ -6,7 +6,7 @@ services:
     container_name: my_postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: Anukool@2000
+      POSTGRES_PASSWORD: #######
       POSTGRES_DB: publisherdb
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -36,7 +36,7 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/publisherdb
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: Anukool@2000
+      SPRING_DATASOURCE_PASSWORD: ########
 
   prometheus:
     image: prom/prometheus
