@@ -19,6 +19,11 @@ public class PublisherController {
         this.publisherService = publisherService;
         this.appRepository = appRepository;
     }
+
+    @GetMapping
+    public String home(){
+        return "Hello Avengers!!";
+    }
     @PostMapping("publish")
     public String addApp(@RequestBody Map<String, Object> data){
         String publisher_name = (String)data.get("name");
@@ -26,12 +31,13 @@ public class PublisherController {
         String app_bundle_id = (String)data.get("app_bundle_id");
         String app_name = (String)data.get("app_name");
         String output = validatorFunction(app_bundle_id);
-
+        System.out.println("Inside post mapping");
 
         if(output.length()==0) {
             System.out.println("Check 5");
             return "App ID is invalid";
         }else{
+            System.out.println("App check 1");
             Optional<App>appOptional = appRepository.findAppByAppBundleId(app_bundle_id);
             if(appOptional.isPresent()){
                 return "App already present in the database";
