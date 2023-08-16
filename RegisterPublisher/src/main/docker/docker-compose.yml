@@ -6,8 +6,8 @@ services:
     container_name: my_postgres
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: #######
-      POSTGRES_DB: publisherdb
+      POSTGRES_PASSWORD:
+      POSTGRES_DB: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
@@ -34,9 +34,14 @@ services:
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/publisherdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: ########
+      SPRING_DATASOURCE_PASSWORD:
+      SPRING_JPA_GENERATE_DDL: true
+      SPRING_JPA_HIBERNATE_DDL_AUTO: create
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+    volumes:
+      - '/Users/anukool.dwivedi/Desktop/OnBoardingProject/AppMetaDataValidationService/RegisterPublisher/logs/requests.log:/app/logs/requests.log'
 
   prometheus:
     image: prom/prometheus
@@ -55,3 +60,5 @@ services:
 volumes:
   postgres_data:
   prometheus_data:
+
+
